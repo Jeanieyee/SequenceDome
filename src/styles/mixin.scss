@@ -1,0 +1,107 @@
+$red:#ff4949;
+
+$theme: #46AE84;
+$left-back: #F3F7F6;
+$org: #FF8919;
+$pri: #409EFF;
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin scrollBar {
+  &::-webkit-scrollbar-track-piece {
+    background: #d3dce6;
+  }
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #99a9bf;
+    border-radius: 20px;
+  }
+}
+
+@mixin relative {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+@mixin moreline-ellipsis($lineHeight: 22px, $lines: 3, $r: 255, $g: 255, $b: 255, $endColor: rgba(255,255,255,1)) {
+  position: relative;
+  line-height: $lineHeight;
+  height: $lineHeight * $lines;
+  overflow: hidden;
+  &::after {
+    content: "";
+    font-weight: bold;
+    position: absolute;
+    background: linear-gradient(to right, rgba($r, $g, $b, 0), $endColor 90%);
+    width: 40%;
+    height: $lineHeight;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+@mixin dis-flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@mixin flex {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+
+@mixin but {
+  background: $theme;
+  color: #ffffff;
+  border:none;
+  &:disabled {
+    background: #999999;
+    cursor: auto;
+  }
+  &:hover{
+    opacity: 0.8;
+  }
+  font-size: 14px
+}
+
+
+// 水平竖直方向居中-translate
+@mixin center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Retina 背景图片
+// 引用例子:@include imgRetina(images/waterlily, jpg, 200px, 200px, no-repeat, center);
+@mixin imgRetina($image, $extension, $width, $height, $position: center, $repeat: no-repeat) {
+  background: url($image + '.' + $extension) $repeat $position;
+
+  @media
+  screen and (-webkit-min-device-pixel-ratio: 2),
+  screen and (   min--moz-device-pixel-ratio: 2),
+  screen and (   -moz-min-device-pixel-ratio: 2),
+  screen and (     -o-min-device-pixel-ratio: 2/1),
+  screen and (        min-device-pixel-ratio: 2),
+  screen and (             min-resolution: 192dpi),
+  screen and (             min-resolution: 2dppx) {
+    background: url($image + '@2x' + '.' + $extension) $repeat $position;
+    background-size: $width $height;
+  }
+}
